@@ -83,10 +83,11 @@ const VerificationPage = () => {
           } else {
             setMessage("Authorization 토큰을 찾을 수 없습니다.");
           }
-
-           if(responseRefreshToken){
+          if (responseRefreshToken){
             localStorage.setItem("refreshToken", responseRefreshToken);
-           } 
+          }else{
+            setMessage("Refresh토큰을 찾을 수 없습니다.");
+          }
 
         } else {
           const errorData = await verifyAndSignupOrLogin.json();
