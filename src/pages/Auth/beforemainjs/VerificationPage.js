@@ -75,7 +75,6 @@ const VerificationPage = () => {
         if (verifyAndSignupOrLogin.ok) {
           const responseToken =
             verifyAndSignupOrLogin.headers.get("Authorization");
-          const responseRefreshToken = verifyAndSignupOrLogin.headers.get("Refresh-Token");
           if (responseToken) {
             const tokenWithoutBearer = responseToken.replace("Bearer", "");
             localStorage.setItem("authToken", tokenWithoutBearer);
