@@ -78,6 +78,8 @@ const VerificationPage = () => {
         if (verifyAndSignupOrLogin.ok) {
           const responseToken =
             verifyAndSignupOrLogin.headers.get("Authorization");
+          const responseRefreshToken =
+            verifyAndSignupOrLogin.headers.get("Refresh-Token");  
           if (responseToken) {
             const tokenWithoutBearer = responseToken.replace("Bearer", "");
             localStorage.setItem("authToken", tokenWithoutBearer);
@@ -85,6 +87,12 @@ const VerificationPage = () => {
           } else {
             setMessage("Authorization 토큰을 찾을 수 없습니다.");
           }
+          if (responseRefreshToken){
+            localStorage.setItem("refreshToken", responseRefreshToken);
+          }else{
+            setMessage("Refresh토큰을 찾을 수 없습니다.");
+          }
+
         } else {
           const errorData = await verifyAndSignupOrLogin.json();
           setMessage(`회원가입 또는 로그인 처리 실패: ${errorData.message}`);
